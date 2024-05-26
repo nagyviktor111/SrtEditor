@@ -100,7 +100,7 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch">
                 <TextBlock HorizontalAlignment="Center">Click Generate to generate</TextBlock>
-                <Button Margin="10" Padding="10">Generate</Button>
+                <Button Margin="10" Padding="10" Click="GenerateButtonClick">Generate</Button>
             </StackPanel>
         </StackPanel>
         <!-- EndRegion -->
