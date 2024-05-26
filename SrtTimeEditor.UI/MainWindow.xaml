@@ -1,0 +1,109 @@
+﻿<Window x:Class="SrtTimeEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="600">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Region Open subtitle -->
+        <StackPanel Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2">
+            <Label>Open subtile:</Label>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0"
+                         HorizontalAlignment="Stretch"/>
+                <Button Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Padding="10, 2, 10, 2"
+                        Margin="5, 0, 0, 0">Browse</Button>
+            </Grid>
+        </StackPanel>
+        <!-- EndRegion -->
+        
+        <!-- Region Delay -->
+        <StackPanel Grid.Row="1"
+                    Grid.Column="0">
+            <Label>Delay:</Label>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <Label>Difference (second):</Label>
+                <TextBox VerticalAlignment="Center"
+                         Padding="10, 5, 10, 5">+0,000</TextBox>
+            </StackPanel>
+        </StackPanel>
+        <!-- EndRegion -->
+
+        <!-- Region Time scale difference -->
+        <StackPanel Grid.Row="1"
+                    Grid.Column="2">
+            <Label>Time scale difference:</Label>
+            <Grid VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="1" Margin="1">Time 1</Label>
+                <Label Grid.Row="0" Grid.Column="2" Margin="1">Time 2</Label>
+                <Label Grid.Row="1" Grid.Column="0" Margin="1" HorizontalAlignment="Right">Movie:</Label>
+                <Label Grid.Row="2" Grid.Column="0" Margin="1" HorizontalAlignment="Right">Subtitle:</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="1" Padding="5">00:00:00,000</TextBox>
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="1" Padding="5">00:00:00,000</TextBox>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="1" Padding="5">00:00:00,000</TextBox>
+                <TextBox Grid.Row="2" Grid.Column="2" Margin="1" Padding="5">00:00:00,000</TextBox>
+            </Grid>
+        </StackPanel>
+        <!-- EndRegion -->
+
+        <!-- Region Location of the created file -->
+        <StackPanel Grid.Row="2"
+                    Grid.Column="0">
+            <Label>Location of the created file:</Label>
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <RadioButton IsChecked="True">Same folder, different name</RadioButton>
+                <RadioButton>Overwrite original file</RadioButton>
+            </StackPanel>
+        </StackPanel>
+        <!-- EndRegion -->
+
+        <!-- Region Generate -->
+        <StackPanel Grid.Row="2"
+                    Grid.Column="1"
+                    VerticalAlignment="Center">
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                <TextBlock HorizontalAlignment="Center">Click Generate to generate</TextBlock>
+                <Button Margin="10" Padding="10">Generate</Button>
+            </StackPanel>
+        </StackPanel>
+        <!-- EndRegion -->
+
+    </Grid>
+</Window>
