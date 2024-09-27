@@ -25,7 +25,7 @@ namespace SrtTimeEditor.Program
         {
             return File.Exists(path)
                 && new FileInfo(path).Length > 0
-                && path.EndsWith("*.srt");
+                && path.EndsWith(".srt");
         }
     }
 }
