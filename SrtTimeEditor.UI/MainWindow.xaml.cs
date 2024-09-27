@@ -1,19 +1,6 @@
-﻿using SrtTimeEditor.BL;
-using SrtTimeEditor.BL.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SrtTimeEditor.Domain;
+using SrtTimeEditor.Program;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SrtTimeEditor
 {
@@ -22,33 +9,26 @@ namespace SrtTimeEditor
     /// </summary>
     public partial class MainWindow : Window
     {
-        private SrtTimeEditorBL _app;
+        private readonly SrtTimeEditorRunner _app;
 
         public MainWindow()
         {
             InitializeComponent();
-            _app = new SrtTimeEditorBL();
+            _app = new SrtTimeEditorRunner();
         }
 
         private void GenerateButtonClick(object sender, RoutedEventArgs e)
         {
             var options = BuildOptions();
-            var isValid = ValidateOptions(options);
 
-            if (isValid)
+            if (_app.IsValid(options))
             {
-                _app.Generate(options);
+                _app.Run(options);
             }
             else
             {
                 MessageBox.Show("Invalid inputs!");
             }
-        }
-
-        private bool ValidateOptions(SrtOptions options)
-        {
-            // TODO
-            return false;
         }
 
         private SrtOptions BuildOptions()

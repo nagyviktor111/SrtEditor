@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SrtTimeEditor.UI", "SrtTimeEditor.UI\SrtTimeEditor.UI.csproj", "{A8F0C344-C10B-494E-A3DA-F9AC2E6E9EDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SrtTimeEditor.BL", "SrtTimeEditor.BL\SrtTimeEditor.BL.csproj", "{0CCEAEE5-5F62-4F7C-A020-07CDA4A2D00F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SrtTimeEditor.Domain", "SrtTimeEditor.Domain\SrtTimeEditor.Domain.csproj", "{BEDD2988-23FB-41A1-8171-E6A2355A84E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SrtTimeEditor.Program", "SrtTimeEditor.Program\SrtTimeEditor.Program.csproj", "{15B812D2-169B-4922-BFD2-37AC63024B02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +19,14 @@ Global
 		{A8F0C344-C10B-494E-A3DA-F9AC2E6E9EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8F0C344-C10B-494E-A3DA-F9AC2E6E9EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8F0C344-C10B-494E-A3DA-F9AC2E6E9EDD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0CCEAEE5-5F62-4F7C-A020-07CDA4A2D00F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0CCEAEE5-5F62-4F7C-A020-07CDA4A2D00F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CCEAEE5-5F62-4F7C-A020-07CDA4A2D00F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0CCEAEE5-5F62-4F7C-A020-07CDA4A2D00F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEDD2988-23FB-41A1-8171-E6A2355A84E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEDD2988-23FB-41A1-8171-E6A2355A84E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEDD2988-23FB-41A1-8171-E6A2355A84E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEDD2988-23FB-41A1-8171-E6A2355A84E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15B812D2-169B-4922-BFD2-37AC63024B02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15B812D2-169B-4922-BFD2-37AC63024B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15B812D2-169B-4922-BFD2-37AC63024B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15B812D2-169B-4922-BFD2-37AC63024B02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

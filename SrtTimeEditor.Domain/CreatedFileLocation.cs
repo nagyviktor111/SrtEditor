@@ -1,4 +1,4 @@
-﻿namespace SrtTimeEditor.BL.Options
+﻿namespace SrtTimeEditor.Domain
 {
     public enum CreatedFileLocation
     {
