@@ -12,21 +12,19 @@ namespace SrtTimeEditor
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly SrtTimeEditorRunner _app;
-
         public MainWindow()
         {
             InitializeComponent();
-            _app = new SrtTimeEditorRunner();
         }
 
         private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
             var options = BuildOptions();
+            var runner = new SrtTimeEditorRunner(options);
 
-            if (_app.IsValid(options))
+            if (runner.IsValid())
             {
-                _app.Run(options);
+                runner.Run();
                 MessageBox.Show("Done!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
@@ -42,8 +40,8 @@ namespace SrtTimeEditor
                 Filter = "Subtitles (*.srt) | *.srt",
                 Multiselect = false // for now
             };
-            
-            bool ? result = openFileDialog.ShowDialog();
+
+            bool? result = openFileDialog.ShowDialog();
             FilePaths.Text = result == true ? openFileDialog.FileName : string.Empty;
         }
 
@@ -80,21 +78,28 @@ namespace SrtTimeEditor
 
         private SrtOptions BuildOptions()
         {
-            return new SrtOptions
+            var options = new SrtOptions();
+            try
             {
-                CreatedFileLocation = (bool)OverwriteOriginal.IsChecked!
+                options.CreatedFileLocation = (bool)OverwriteOriginal.IsChecked!
                     ? CreatedFileLocation.OverwriteOriginal
-                    : CreatedFileLocation.SameFolderDifferentName,
-                TimeScaleDifference = new TimeScaleDifference 
+                    : CreatedFileLocation.SameFolderDifferentName;
+                options.TimeScaleDifference = new TimeScaleDifference
                 {
                     Movie1 = TimeSpan.Parse(Movie1.Text),
                     Movie2 = TimeSpan.Parse(Movie2.Text),
                     Subtitle1 = TimeSpan.Parse(Subtitle1.Text),
                     Subtitle2 = TimeSpan.Parse(Subtitle2.Text)
-                },
-                Delay = double.Parse(Delay.Text),
-                FilePaths = FilePaths.Text,
-            };
+                };
+                options.Delay = double.Parse(Delay.Text);
+                options.FilePaths = FilePaths.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return options;
         }
     }
 }

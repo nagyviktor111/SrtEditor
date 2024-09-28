@@ -10,13 +10,13 @@ namespace SrtTimeEditor.Program
                 && (HasDeley(options.Delay) || HasTimeScaleDiff(options.TimeScaleDifference));
         }
 
-        private bool HasTimeScaleDiff(TimeScaleDifference diff)
+        public bool HasTimeScaleDiff(TimeScaleDifference diff)
         {
             return diff.Movie1 != diff.Subtitle1
                 || diff.Movie2 != diff.Subtitle2;
         }
 
-        private bool HasDeley(double delay)
+        public bool HasDeley(double delay)
         {
             return delay != 0;
         }
