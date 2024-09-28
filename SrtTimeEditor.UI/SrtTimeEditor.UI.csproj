@@ -9,8 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="subtitle_15356348.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SrtTimeEditor.Domain\SrtTimeEditor.Domain.csproj" />
     <ProjectReference Include="..\SrtTimeEditor.Program\SrtTimeEditor.Program.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="subtitle_15356348.png" />
   </ItemGroup>
 
 </Project>

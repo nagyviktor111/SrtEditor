@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600">
+        Title="SRT time editor" Height="400" Width="600" Icon="/subtitle_15356348.png">
     <Grid Margin="10"
           AllowDrop="True"
           DragOver="MainGrid_DragOver"
