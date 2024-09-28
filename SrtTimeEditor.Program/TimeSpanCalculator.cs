@@ -1,16 +1,11 @@
 ﻿using SrtTimeEditor.Domain;
+using SrtTimeEditor.Program.Exceptions;
 
 namespace SrtTimeEditor.Program
 {
-    public class TimeSpanCalculator
+    public class TimeSpanCalculator(SrtOptions options)
     {
-
-        private readonly SrtOptions _options;
-
-        public TimeSpanCalculator(SrtOptions options)
-        {
-            _options = options;
-        }
+        private readonly SrtOptions _options = options;
 
         public string CalculateScale(string line)
         {
@@ -28,7 +23,7 @@ namespace SrtTimeEditor.Program
             starting = TimeSpan.FromTicks((long)startTicks);
             ending = TimeSpan.FromTicks((long)endTicks);
 
-            return GetNewLine(starting, ending);
+            return FormatLine(starting, ending);
         }
 
         public string CalculateDelay(string line)
@@ -41,10 +36,10 @@ namespace SrtTimeEditor.Program
 
             if (TimeSpan.Parse("00:00:00") > starting)
             {
-                throw new Exception("negative time");
+                throw new NegativeTimeException("Starting time gets less than 0 in this line: " + Environment.NewLine + line);
             }
 
-            return GetNewLine(starting, ending);
+            return FormatLine(starting, ending);
         }
 
         private static void GetTimes(string line, out TimeSpan starting, out TimeSpan ending)
@@ -53,7 +48,7 @@ namespace SrtTimeEditor.Program
             _ = TimeSpan.TryParse(line.Remove(0, 17), out ending);
         }
 
-        private static string GetNewLine(TimeSpan starting, TimeSpan ending)
+        private static string FormatLine(TimeSpan starting, TimeSpan ending)
         {
             return starting.ToString("hh\\:mm\\:ss\\,fff") + " --> " + ending.ToString("hh\\:mm\\:ss\\,fff");
         }

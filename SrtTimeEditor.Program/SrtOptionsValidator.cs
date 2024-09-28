@@ -1,20 +1,21 @@
 ﻿using SrtTimeEditor.Domain;
+using SrtTimeEditor.Program.Exceptions;
 
 namespace SrtTimeEditor.Program
 {
-    public class SrtOptionsValidator
+    public class SrtOptionsValidator(SrtOptions options)
     {
-        private readonly SrtOptions _options;
+        private readonly SrtOptions _options = options;
 
-        public SrtOptionsValidator(SrtOptions options)
+        public void Validate()
         {
-            _options = options;
-        }
-
-        public bool Validate()
-        {
-            return ProperFileExists(_options.FilePaths)
+            bool isValid = ProperFileExists(_options.FilePaths)
                 && (HasDeley(_options.Delay) || HasTimeScaleDiff(_options.TimeScaleDifference));
+
+            if (!isValid)
+            {
+                throw new ValidationException("Please check your inputs!");
+            }
         }
 
         public static bool HasTimeScaleDiff(TimeScaleDifference diff)

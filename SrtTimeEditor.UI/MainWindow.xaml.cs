@@ -19,17 +19,21 @@ namespace SrtTimeEditor
 
         private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
-            var options = BuildOptions();
-            var runner = new SrtTimeEditorRunner(options);
-
-            if (runner.IsValid())
+            GenerateButton.IsEnabled = false;
+            try
             {
+                var options = BuildOptions();
+                var runner = new SrtTimeEditorRunner(options);
                 runner.Run();
                 MessageBox.Show("Done!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please check your values inputs!", "Invalid inputs", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(ex.Message, ex.GetType().Name, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            finally
+            {
+                GenerateButton.IsEnabled = true;
             }
         }
 
@@ -37,8 +41,7 @@ namespace SrtTimeEditor
         {
             OpenFileDialog openFileDialog = new()
             {
-                Filter = "Subtitles (*.srt) | *.srt",
-                Multiselect = false // for now
+                Filter = "Subtitles (*.srt) | *.srt"
             };
 
             bool? result = openFileDialog.ShowDialog();
@@ -78,28 +81,21 @@ namespace SrtTimeEditor
 
         private SrtOptions BuildOptions()
         {
-            var options = new SrtOptions();
-            try
+            return new SrtOptions
             {
-                options.CreatedFileLocation = (bool)OverwriteOriginal.IsChecked!
+                CreatedFileLocation = (bool)OverwriteOriginal.IsChecked!
                     ? CreatedFileLocation.OverwriteOriginal
-                    : CreatedFileLocation.SameFolderDifferentName;
-                options.TimeScaleDifference = new TimeScaleDifference
+                    : CreatedFileLocation.SameFolderDifferentName,
+                TimeScaleDifference = new TimeScaleDifference
                 {
                     Movie1 = TimeSpan.Parse(Movie1.Text),
                     Movie2 = TimeSpan.Parse(Movie2.Text),
                     Subtitle1 = TimeSpan.Parse(Subtitle1.Text),
                     Subtitle2 = TimeSpan.Parse(Subtitle2.Text)
-                };
-                options.Delay = double.Parse(Delay.Text);
-                options.FilePaths = FilePaths.Text;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            return options;
+                },
+                Delay = double.Parse(Delay.Text),
+                FilePaths = FilePaths.Text
+            };
         }
     }
 }

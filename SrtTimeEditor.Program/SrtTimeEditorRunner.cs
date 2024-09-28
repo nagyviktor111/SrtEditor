@@ -18,13 +18,9 @@ namespace SrtTimeEditor.Program
             _encoding = Encoding.UTF8;
         }
 
-        public bool IsValid()
-        {
-            return _validator.Validate();
-        }
-
         public void Run()
         {
+            _validator.Validate();
             var lines = ReadLines();
             lines = SelectCalculation(lines);
             WriteLines(lines);
@@ -33,7 +29,7 @@ namespace SrtTimeEditor.Program
         private IEnumerable<string> ReadLines()
         {
             using StreamReader reader = new(_options.FilePaths, _encoding, true);
-            string line;
+            string? line;
             while ((line = reader.ReadLine()) != null)
             {
                 yield return line;
@@ -55,17 +51,17 @@ namespace SrtTimeEditor.Program
             return lines;
         }
 
-        private List<string> UpdateLines(IEnumerable<string> lines, Func<string, string> calculationFunc)
+        private static List<string> UpdateLines(IEnumerable<string> lines, Func<string, string> calculationFunc)
         {
-            var tmpLines = new List<string>();
+            var newLines = new List<string>();
 
             foreach (string line in lines)
             {
                 var newLine = line.Contains("-->") ? calculationFunc(line) : line;
-                tmpLines.Add(newLine);
+                newLines.Add(newLine);
             }
 
-            return tmpLines;
+            return newLines;
         }
 
         private void WriteLines(IEnumerable<string> lines)
