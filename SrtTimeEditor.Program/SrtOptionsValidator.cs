@@ -4,24 +4,31 @@ namespace SrtTimeEditor.Program
 {
     public class SrtOptionsValidator
     {
-        public bool Validate(SrtOptions options)
+        private readonly SrtOptions _options;
+
+        public SrtOptionsValidator(SrtOptions options)
         {
-            return ProperFileExists(options.FilePaths)
-                && (HasDeley(options.Delay) || HasTimeScaleDiff(options.TimeScaleDifference));
+            _options = options;
         }
 
-        public bool HasTimeScaleDiff(TimeScaleDifference diff)
+        public bool Validate()
+        {
+            return ProperFileExists(_options.FilePaths)
+                && (HasDeley(_options.Delay) || HasTimeScaleDiff(_options.TimeScaleDifference));
+        }
+
+        public static bool HasTimeScaleDiff(TimeScaleDifference diff)
         {
             return diff.Movie1 != diff.Subtitle1
                 || diff.Movie2 != diff.Subtitle2;
         }
 
-        public bool HasDeley(double delay)
+        public static bool HasDeley(double delay)
         {
             return delay != 0;
         }
 
-        private bool ProperFileExists(string path)
+        private static bool ProperFileExists(string path)
         {
             return File.Exists(path)
                 && new FileInfo(path).Length > 0

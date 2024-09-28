@@ -5,26 +5,28 @@ namespace SrtTimeEditor.Program
 {
     public class SrtTimeEditorRunner
     {
-        private readonly SrtOptionsValidator _validator;
-        private readonly Encoding _encoding;
         private readonly SrtOptions _options;
+        private readonly SrtOptionsValidator _validator;
+        private readonly TimeSpanCalculator _calculator;
+        private readonly Encoding _encoding;
 
         public SrtTimeEditorRunner(SrtOptions options)
         {
-            _validator = new SrtOptionsValidator();
-            _encoding = Encoding.UTF8;
             _options = options;
+            _validator = new SrtOptionsValidator(_options);
+            _calculator = new TimeSpanCalculator(_options);
+            _encoding = Encoding.UTF8;
         }
 
         public bool IsValid()
         {
-            return _validator.Validate(_options);
+            return _validator.Validate();
         }
 
         public void Run()
         {
             var lines = ReadLines();
-            lines = ChangeLines(lines);
+            lines = SelectCalculation(lines);
             WriteLines(lines);
         }
 
@@ -38,73 +40,32 @@ namespace SrtTimeEditor.Program
             }
         }
 
-        private IEnumerable<string> ChangeLines(IEnumerable<string> lines)
+        private IEnumerable<string> SelectCalculation(IEnumerable<string> lines)
         {
-            if (_validator.HasDeley(_options.Delay))
+            if (SrtOptionsValidator.HasDeley(_options.Delay))
             {
-                var tmpLines = new List<string>();
-                var difference = new TimeSpan((long)(_options.Delay * 10000000));
-
-                foreach (string line in lines)
-                {
-                    if (line.Contains("-->"))
-                    {
-                        _ = TimeSpan.TryParse(line.Remove(12, 17), out TimeSpan starting);
-                        _ = TimeSpan.TryParse(line.Remove(0, 17), out TimeSpan ending);
-                        starting += difference;
-                        ending += difference;
-
-                        //var nulla = TimeSpan.Parse("00:00:00");
-                        //if (nulla > starting) return "negative time";
-
-                        var newLine = starting.ToString("hh\\:mm\\:ss\\,fff") + " --> " + ending.ToString("hh\\:mm\\:ss\\,fff");
-                        tmpLines.Add(newLine);
-                    }
-                    else
-                    {
-                        tmpLines.Add(line);
-                    }
-                }
-
-                lines = tmpLines;
+                lines = UpdateLines(lines, _calculator.CalculateDelay);
             }
 
-            if (_validator.HasTimeScaleDiff(_options.TimeScaleDifference))
+            if (SrtOptionsValidator.HasTimeScaleDiff(_options.TimeScaleDifference))
             {
-                var tmpLines = new List<string>();
-
-                foreach (string line in lines)
-                {
-                    if (line.Contains("-->"))
-                    {
-                        float movie1 = _options.TimeScaleDifference.Movie1.Ticks;
-                        float movie2 = _options.TimeScaleDifference.Movie2.Ticks;
-                        float subtitle1 = _options.TimeScaleDifference.Subtitle1.Ticks;
-                        float subtitle2 = _options.TimeScaleDifference.Subtitle2.Ticks;
-
-                        _ = TimeSpan.TryParse(line.Remove(12, 17), out TimeSpan starting);
-                        _ = TimeSpan.TryParse(line.Remove(0, 17), out TimeSpan ending);
-                        float startTicks = starting.Ticks;
-                        float endTicks = ending.Ticks;
-                        startTicks = movie2 + ((movie2 - movie1) / (subtitle2 - subtitle1)) * (startTicks - subtitle2);
-                        endTicks = movie2 + ((movie2 - movie1) / (subtitle2 - subtitle1)) * (endTicks - subtitle2);
-
-                        starting = TimeSpan.FromTicks((long)startTicks);
-                        ending = TimeSpan.FromTicks((long)endTicks);
-
-                        var newLine = starting.ToString("hh\\:mm\\:ss\\,fff") + " --> " + ending.ToString("hh\\:mm\\:ss\\,fff");
-                        tmpLines.Add(newLine);
-                    }
-                    else
-                    {
-                        tmpLines.Add(line);
-                    }
-                }
-
-                lines = tmpLines;
+                lines = UpdateLines(lines, _calculator.CalculateScale);
             }
 
             return lines;
+        }
+
+        private List<string> UpdateLines(IEnumerable<string> lines, Func<string, string> calculationFunc)
+        {
+            var tmpLines = new List<string>();
+
+            foreach (string line in lines)
+            {
+                var newLine = line.Contains("-->") ? calculationFunc(line) : line;
+                tmpLines.Add(newLine);
+            }
+
+            return tmpLines;
         }
 
         private void WriteLines(IEnumerable<string> lines)
