@@ -52,6 +52,8 @@
                 <Label>Difference (second):</Label>
                 <TextBox VerticalAlignment="Center"
                          x:Name="Delay"
+                         GotFocus="Delay_GotFocus"
+                         PreviewMouseLeftButtonDown="Delay_PreviewMouseLeftButtonDown"
                          Padding="10, 5, 10, 5">+0,000</TextBox>
             </StackPanel>
         </StackPanel>

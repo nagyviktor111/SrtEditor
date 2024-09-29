@@ -15,7 +15,9 @@ namespace SrtTimeEditor.Program
             _options = options;
             _validator = new SrtOptionsValidator(_options);
             _calculator = new TimeSpanCalculator(_options);
-            _encoding = Encoding.UTF8;
+
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            _encoding = Encoding.GetEncoding("ISO-8859-2");
         }
 
         public void Run()

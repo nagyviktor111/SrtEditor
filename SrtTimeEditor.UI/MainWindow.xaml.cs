@@ -4,6 +4,8 @@ using SrtTimeEditor.Program;
 using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace SrtTimeEditor
 {
@@ -76,6 +78,24 @@ namespace SrtTimeEditor
                         MessageBox.Show("Please drop a .srt file only.", "Invalid File Type", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
+            }
+        }
+
+        private void Delay_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                textBox.SelectAll();
+            }
+        }
+
+        private void Delay_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is TextBox textBox && !textBox.IsKeyboardFocusWithin)
+            {
+                e.Handled = true;
+                textBox.Focus();
+                textBox.SelectAll();
             }
         }
 
