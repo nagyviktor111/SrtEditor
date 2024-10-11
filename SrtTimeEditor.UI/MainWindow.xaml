@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SrtTimeEditor.UI.UserControls"
         mc:Ignorable="d"
         Title="SRT time editor" Height="400" Width="600" Icon="/subtitle_15356348.png">
     <Grid Margin="10"
@@ -20,87 +21,27 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Region Open subtitle -->
         <StackPanel Grid.Row="0"
                     Grid.Column="0"
                     Grid.ColumnSpan="2">
-            <Label>Open subtile:</Label>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0"
-                         x:Name="FilePaths"
-                         AllowDrop="True"
-                         HorizontalAlignment="Stretch"/>
-                <Button Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        Padding="10, 2, 10, 2"
-                        Margin="5, 0, 0, 0" Click="BrowseButton_Click">Browse</Button>
-            </Grid>
+            <local:SrtFileBrowser x:Name="SrtFileBrowserInstance" />
         </StackPanel>
-        <!-- EndRegion -->
-        
-        <!-- Region Delay -->
+
         <StackPanel Grid.Row="1"
                     Grid.Column="0">
-            <Label>Delay:</Label>
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-                <Label>Difference (second):</Label>
-                <TextBox VerticalAlignment="Center"
-                         x:Name="Delay"
-                         GotFocus="Delay_GotFocus"
-                         PreviewMouseLeftButtonDown="Delay_PreviewMouseLeftButtonDown"
-                         Padding="10, 5, 10, 5">+0,000</TextBox>
-            </StackPanel>
+            <local:DelayInput x:Name="DelayInputInstance" />
         </StackPanel>
-        <!-- EndRegion -->
 
-        <!-- Region Time scale difference -->
         <StackPanel Grid.Row="1"
                     Grid.Column="2">
-            <Label>Time scale difference:</Label>
-            <Grid VerticalAlignment="Center"
-                  HorizontalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.Column="1" Margin="1">Time 1</Label>
-                <Label Grid.Row="0" Grid.Column="2" Margin="1">Time 2</Label>
-                <Label Grid.Row="1" Grid.Column="0" Margin="1" HorizontalAlignment="Right">Movie:</Label>
-                <Label Grid.Row="2" Grid.Column="0" Margin="1" HorizontalAlignment="Right">Subtitle:</Label>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="1" Padding="5" x:Name="Movie1">00:00:00,000</TextBox>
-                <TextBox Grid.Row="1" Grid.Column="2" Margin="1" Padding="5" x:Name="Movie2">00:00:00,000</TextBox>
-                <TextBox Grid.Row="2" Grid.Column="1" Margin="1" Padding="5" x:Name="Subtitle1">00:00:00,000</TextBox>
-                <TextBox Grid.Row="2" Grid.Column="2" Margin="1" Padding="5" x:Name="Subtitle2">00:00:00,000</TextBox>
-            </Grid>
+            <local:TimeScaleEditor x:Name="TimeScaleEditorInstance" />
         </StackPanel>
-        <!-- EndRegion -->
 
-        <!-- Region Location of the created file -->
         <StackPanel Grid.Row="2"
                     Grid.Column="0">
-            <Label>Location of the created file:</Label>
-            <StackPanel Orientation="Vertical"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-                <RadioButton x:Name="SameFolderDifferentName" IsChecked="True">Same folder, different name</RadioButton>
-                <RadioButton x:Name="OverwriteOriginal" >Overwrite original file</RadioButton>
-            </StackPanel>
+            <local:CreatedFileNameEditor x:Name="CreatedFileNameEditorInstance" />
         </StackPanel>
-        <!-- EndRegion -->
 
-        <!-- Region Generate -->
         <StackPanel Grid.Row="2"
                     Grid.Column="1"
                     VerticalAlignment="Center">
@@ -114,7 +55,6 @@
                         Click="GenerateButton_Click">Generate</Button>
             </StackPanel>
         </StackPanel>
-        <!-- EndRegion -->
 
     </Grid>
 </Window>

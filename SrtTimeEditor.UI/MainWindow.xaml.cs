@@ -1,17 +1,11 @@
-﻿using Microsoft.Win32;
-using SrtTimeEditor.Domain;
+﻿using SrtTimeEditor.Domain;
 using SrtTimeEditor.Program;
 using System;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace SrtTimeEditor
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -39,17 +33,6 @@ namespace SrtTimeEditor
             }
         }
 
-        private void BrowseButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new()
-            {
-                Filter = "Subtitles (*.srt) | *.srt"
-            };
-
-            bool? result = openFileDialog.ShowDialog();
-            FilePaths.Text = result == true ? openFileDialog.FileName : string.Empty;
-        }
-
         private void MainGrid_DragOver(object sender, DragEventArgs e)
         {
             e.Effects = e.Data.GetDataPresent(DataFormats.FileDrop)
@@ -71,7 +54,7 @@ namespace SrtTimeEditor
 
                     if (extension == ".srt")
                     {
-                        FilePaths.Text = firstFile;
+                        SrtFileBrowserInstance.FilePaths.Text = firstFile;
                     }
                     else
                     {
@@ -81,40 +64,22 @@ namespace SrtTimeEditor
             }
         }
 
-        private void Delay_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (sender is TextBox textBox)
-            {
-                textBox.SelectAll();
-            }
-        }
-
-        private void Delay_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is TextBox textBox && !textBox.IsKeyboardFocusWithin)
-            {
-                e.Handled = true;
-                textBox.Focus();
-                textBox.SelectAll();
-            }
-        }
-
         private SrtOptions BuildOptions()
         {
             return new SrtOptions
             {
-                CreatedFileLocation = (bool)OverwriteOriginal.IsChecked!
+                CreatedFileLocation = (bool)CreatedFileNameEditorInstance.OverwriteOriginal.IsChecked!
                     ? CreatedFileLocation.OverwriteOriginal
                     : CreatedFileLocation.SameFolderDifferentName,
                 TimeScaleDifference = new TimeScaleDifference
                 {
-                    Movie1 = TimeSpan.Parse(Movie1.Text),
-                    Movie2 = TimeSpan.Parse(Movie2.Text),
-                    Subtitle1 = TimeSpan.Parse(Subtitle1.Text),
-                    Subtitle2 = TimeSpan.Parse(Subtitle2.Text)
+                    Movie1 = TimeSpan.Parse(TimeScaleEditorInstance.Movie1.Text),
+                    Movie2 = TimeSpan.Parse(TimeScaleEditorInstance.Movie2.Text),
+                    Subtitle1 = TimeSpan.Parse(TimeScaleEditorInstance.Subtitle1.Text),
+                    Subtitle2 = TimeSpan.Parse(TimeScaleEditorInstance.Subtitle2.Text)
                 },
-                Delay = double.Parse(Delay.Text),
-                FilePaths = FilePaths.Text
+                Delay = double.Parse(DelayInputInstance.Delay.Text),
+                FilePaths = SrtFileBrowserInstance.FilePaths.Text
             };
         }
     }
