@@ -1,11 +1,11 @@
-﻿using SrtTimeEditor.Domain;
-using SrtTimeEditor.Program;
+﻿using SrtEditor.Domain.TimeEditor;
+using SrtEditor.TimeEditor;
 using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SrtTimeEditor.UI.Pages
+namespace SrtEditor.UI.Pages
 {
     public partial class TimeEditor : Page
     {
@@ -65,9 +65,9 @@ namespace SrtTimeEditor.UI.Pages
             }
         }
 
-        private SrtOptions BuildOptions()
+        private TimeEditorOptions BuildOptions()
         {
-            return new SrtOptions
+            return new TimeEditorOptions
             {
                 CreatedFileLocation = (bool)CreatedFileNameEditorInstance.OverwriteOriginal.IsChecked!
                     ? CreatedFileLocation.OverwriteOriginal

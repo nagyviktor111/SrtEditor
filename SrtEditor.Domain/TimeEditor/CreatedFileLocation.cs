@@ -1,4 +1,4 @@
-﻿namespace SrtTimeEditor.Domain
+﻿namespace SrtEditor.Domain.TimeEditor
 {
     public enum CreatedFileLocation
     {

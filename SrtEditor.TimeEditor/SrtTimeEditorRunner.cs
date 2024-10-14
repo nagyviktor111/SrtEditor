@@ -1,19 +1,19 @@
-﻿using SrtTimeEditor.Domain;
+﻿using SrtEditor.Domain.TimeEditor;
 using System.Text;
 
-namespace SrtTimeEditor.Program
+namespace SrtEditor.TimeEditor
 {
     public class SrtTimeEditorRunner
     {
-        private readonly SrtOptions _options;
-        private readonly SrtOptionsValidator _validator;
+        private readonly TimeEditorOptions _options;
+        private readonly TimeEditorOptionsValidator _validator;
         private readonly TimeSpanCalculator _calculator;
         private readonly Encoding _encoding;
 
-        public SrtTimeEditorRunner(SrtOptions options)
+        public SrtTimeEditorRunner(TimeEditorOptions options)
         {
             _options = options;
-            _validator = new SrtOptionsValidator(_options);
+            _validator = new TimeEditorOptionsValidator(_options);
             _calculator = new TimeSpanCalculator(_options);
 
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -40,12 +40,12 @@ namespace SrtTimeEditor.Program
 
         private IEnumerable<string> SelectCalculation(IEnumerable<string> lines)
         {
-            if (SrtOptionsValidator.HasDeley(_options.Delay))
+            if (TimeEditorOptionsValidator.HasDeley(_options.Delay))
             {
                 lines = UpdateLines(lines, _calculator.CalculateDelay);
             }
 
-            if (SrtOptionsValidator.HasTimeScaleDiff(_options.TimeScaleDifference))
+            if (TimeEditorOptionsValidator.HasTimeScaleDiff(_options.TimeScaleDifference))
             {
                 lines = UpdateLines(lines, _calculator.CalculateScale);
             }

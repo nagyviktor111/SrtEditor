@@ -1,4 +1,4 @@
-﻿namespace SrtTimeEditor.Program.Exceptions
+﻿namespace SrtEditor.TimeEditor.Exceptions
 {
     public class ValidationException : Exception
     {

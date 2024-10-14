@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace SrtTimeEditor.UI.UserControls
+namespace SrtEditor.UI.UserControls
 {
     public partial class TimeScaleEditor : UserControl
     {

@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SrtTimeEditor.Domain\SrtTimeEditor.Domain.csproj" />
-    <ProjectReference Include="..\SrtTimeEditor.Program\SrtTimeEditor.Program.csproj" />
+    <ProjectReference Include="..\SrtEditor.Domain\SrtEditor.Domain.csproj" />
+    <ProjectReference Include="..\SrtEditor.TimeEditor\SrtEditor.TimeEditor.csproj" />
   </ItemGroup>
 
   <ItemGroup>

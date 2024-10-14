@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace SrtTimeEditor
+namespace SrtEditor
 {
     /// <summary>
     /// Interaction logic for App.xaml

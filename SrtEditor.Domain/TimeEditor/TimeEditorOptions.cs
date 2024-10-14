@@ -1,6 +1,6 @@
-﻿namespace SrtTimeEditor.Domain
+﻿namespace SrtEditor.Domain.TimeEditor
 {
-    public class SrtOptions
+    public class TimeEditorOptions
     {
         public string FilePaths { get; set; } = string.Empty;
 

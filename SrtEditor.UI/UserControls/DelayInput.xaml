@@ -1,18 +1,22 @@
-﻿<UserControl x:Class="SrtTimeEditor.UI.UserControls.CreatedFileNameEditor"
+﻿<UserControl x:Class="SrtEditor.UI.UserControls.DelayInput"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SrtTimeEditor.UI.UserControls"
+             xmlns:local="clr-namespace:SrtEditor.UI.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
-        <Label>Location of the created file:</Label>
-        <StackPanel Orientation="Vertical"
+        <Label>Delay:</Label>
+        <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
-            <RadioButton x:Name="SameFolderDifferentName" IsChecked="True">Same folder, different name</RadioButton>
-            <RadioButton x:Name="OverwriteOriginal" >Overwrite original file</RadioButton>
+            <Label>Difference (second):</Label>
+            <TextBox VerticalAlignment="Center"
+                         x:Name="Delay"
+                         GotFocus="Delay_GotFocus"
+                         PreviewMouseLeftButtonDown="Delay_PreviewMouseLeftButtonDown"
+                         Padding="10, 5, 10, 5">+0,000</TextBox>
         </StackPanel>
     </StackPanel>
 </UserControl>

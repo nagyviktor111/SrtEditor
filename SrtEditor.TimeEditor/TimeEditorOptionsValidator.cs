@@ -1,11 +1,11 @@
-﻿using SrtTimeEditor.Domain;
-using SrtTimeEditor.Program.Exceptions;
+﻿using SrtEditor.Domain.TimeEditor;
+using SrtEditor.TimeEditor.Exceptions;
 
-namespace SrtTimeEditor.Program
+namespace SrtEditor.TimeEditor
 {
-    public class SrtOptionsValidator(SrtOptions options)
+    public class TimeEditorOptionsValidator(TimeEditorOptions options)
     {
-        private readonly SrtOptions _options = options;
+        private readonly TimeEditorOptions _options = options;
 
         public void Validate()
         {

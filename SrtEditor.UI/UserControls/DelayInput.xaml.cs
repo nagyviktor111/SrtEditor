@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace SrtTimeEditor.UI.UserControls
+namespace SrtEditor.UI.UserControls
 {
     public partial class DelayInput : UserControl
     {

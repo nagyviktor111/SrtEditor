@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace SrtTimeEditor
+namespace SrtEditor
 {
     public partial class MainWindow : Window
     {
