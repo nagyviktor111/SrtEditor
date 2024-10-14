@@ -10,10 +10,87 @@
         <TabItem Header="Time Editor">
             <Frame Source="Pages/TimeEditor.xaml" />
         </TabItem>
-        <TabItem Header="Rename All">
-            <Label>Coming soon</Label>
+        <TabItem Header="Rename Files">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--region folderbrowse-->
+                <StackPanel Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+                    <Label>Open folder:</Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 x:Name="FilePaths"
+                                 AllowDrop="True"
+                                 HorizontalAlignment="Stretch"/>
+                        <Button Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                Padding="10, 2, 10, 2"
+                                Margin="5, 0, 0, 0">Browse</Button>
+                    </Grid>
+                </StackPanel>
+                <!--end folderbrowse-->
+
+                <!--region operations-->
+                <StackPanel Grid.Row="1"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <Label>Operations:</Label>
+                    <CheckBox Content="Copy video names"/>
+                    <CheckBox Content="Extend filename"/>
+                </StackPanel>
+                <!--end operations-->
+
+                <!--region operations2-->
+                <StackPanel Grid.Row="1"
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <Label>Extend with:</Label>
+                    <TextBox x:Name="Extension"
+                             Text=".hu"
+                             AllowDrop="True"
+                             HorizontalAlignment="Stretch"/>
+                </StackPanel>
+                <!--end operations2-->
+
+                <!--region Preview-->
+                <StackPanel Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+                    <Label>Preview</Label>
+                    <ListBox Height="100"
+                             d:ItemsSource="{d:SampleData ItemCount=2}"/>
+                </StackPanel>
+                <!--end Preview-->
+
+                <StackPanel Grid.Row="3"
+                            Grid.Column="1"
+                            VerticalAlignment="Center">
+                    <Button x:Name="GenerateButton"
+                            Margin="10"
+                            Padding="10">Rename files</Button>
+                </StackPanel>
+
+            </Grid>
         </TabItem>
-        <TabItem Header="Filename Extender">
+        <TabItem Header="Settings">
             <Label>Coming soon</Label>
         </TabItem>
     </TabControl>

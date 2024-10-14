@@ -9,14 +9,14 @@
     <StackPanel>
         <Label>Delay:</Label>
         <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
             <Label>Difference (second):</Label>
             <TextBox VerticalAlignment="Center"
-                         x:Name="Delay"
-                         GotFocus="Delay_GotFocus"
-                         PreviewMouseLeftButtonDown="Delay_PreviewMouseLeftButtonDown"
-                         Padding="10, 5, 10, 5">+0,000</TextBox>
+                     x:Name="Delay"
+                     GotFocus="Delay_GotFocus"
+                     PreviewMouseLeftButtonDown="Delay_PreviewMouseLeftButtonDown"
+                     Padding="10, 5, 10, 5">+0,000</TextBox>
         </StackPanel>
     </StackPanel>
 </UserControl>

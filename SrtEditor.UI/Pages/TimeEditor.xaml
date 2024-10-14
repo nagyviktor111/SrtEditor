@@ -35,7 +35,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1"
-                Grid.Column="2">
+                Grid.Column="1">
             <local:TimeScaleEditor x:Name="TimeScaleEditorInstance" />
         </StackPanel>
 
