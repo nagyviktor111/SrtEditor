@@ -10,11 +10,11 @@
         <TabItem Header="Time Editor">
             <Frame Source="Pages/TimeEditor.xaml" />
         </TabItem>
-        <TabItem Header="Rename Files">
+        <TabItem Header="Name Editor">
             <Grid Margin="10"
                   AllowDrop="True"
-                  PreviewDragOver="RenamerPage_PreviewDragOver"
-                  Drop="RenamerPage_Drop">
+                  PreviewDragOver="NameEditorPage_PreviewDragOver"
+                  Drop="NameEditorPage_Drop">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -45,7 +45,7 @@
                                 HorizontalAlignment="Right"
                                 Padding="10, 2, 10, 2"
                                 Margin="5, 0, 0, 0"
-                                Click="BrowseButton_Click">Browse</Button>
+                                Click="FolderBrowseButton_Click">Browse</Button>
                     </Grid>
                 </StackPanel>
                 <!--end folderbrowse-->
@@ -63,6 +63,7 @@
                             <Label>Operations:</Label>
                             <StackPanel HorizontalAlignment="Center">
                                 <CheckBox Content="Copy video names"
+                                          x:Name="CopyCheckBox"
                                           IsChecked="True"/>
                                 <CheckBox Content="Extend filename"
                                           x:Name="ExtendCheckBox"/>
@@ -94,9 +95,9 @@
                 <StackPanel Grid.Row="3"
                             Grid.Column="1"
                             VerticalAlignment="Center">
-                    <Button x:Name="GenerateButton"
+                    <Button x:Name="RenameButton"
                             Margin="10"
-                            Padding="10">Rename files</Button>
+                            Padding="10" Click="RenameButton_Click">Rename files</Button>
                 </StackPanel>
 
             </Grid>

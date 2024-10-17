@@ -11,7 +11,7 @@ namespace SrtEditor.UI.UserControls
             InitializeComponent();
         }
 
-        private void BrowseButton_Click(object sender, RoutedEventArgs e)
+        private void SrtBrowseButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new()
             {

@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SrtEditor.Domain\SrtEditor.Domain.csproj" />
+    <ProjectReference Include="..\SrtEditor.NameEditor\SrtEditor.NameEditor.csproj" />
     <ProjectReference Include="..\SrtEditor.TimeEditor\SrtEditor.TimeEditor.csproj" />
   </ItemGroup>
 

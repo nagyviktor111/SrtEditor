@@ -1,6 +1,6 @@
-﻿namespace SrtEditor.Domain.Renamer
+﻿namespace SrtEditor.Domain.NameEditor
 {
-    public class RenamerOptions
+    public class NameEditorOptions
     {
         public string? FolderPath { get; set; }
 

@@ -1,4 +1,8 @@
 ﻿using Microsoft.Win32;
+using SrtEditor.Domain.NameEditor;
+using SrtEditor.NameEditor;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 
@@ -11,7 +15,7 @@ namespace SrtEditor
             InitializeComponent();
         }
 
-        private void BrowseButton_Click(object sender, RoutedEventArgs e)
+        private void FolderBrowseButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFolderDialog folderDialog = new();
 
@@ -21,7 +25,7 @@ namespace SrtEditor
             }
         }
 
-        private void RenamerPage_PreviewDragOver(object sender, DragEventArgs e)
+        private void NameEditorPage_PreviewDragOver(object sender, DragEventArgs e)
         {
             var dataPresent = e.Data.GetDataPresent(DataFormats.FileDrop);
             var droppedPaths = (string[])e.Data.GetData(DataFormats.FileDrop);
@@ -33,7 +37,7 @@ namespace SrtEditor
             e.Handled = true;
         }
 
-        private void RenamerPage_Drop(object sender, DragEventArgs e)
+        private void NameEditorPage_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -47,6 +51,55 @@ namespace SrtEditor
                     MessageBox.Show("Please drop only one folder.", "Invalid Drop", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
+        }
+
+        private void RenameButton_Click(object sender, RoutedEventArgs e)
+        {
+            RenameButton.IsEnabled = false;
+            try
+            {
+                var options = BuildOptions();
+
+                // test
+                var runner = new FileNameEditorRunner(options);
+                var preview = runner.UpdatePreview(options);
+                PreviewListBox.ItemsSource = BuildItemSource(preview);
+                // end test
+
+                MessageBox.Show("Done!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().Name, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            finally
+            {
+                RenameButton.IsEnabled = true;
+            }
+        }
+
+        private static List<string> BuildItemSource(IEnumerable<PreviewItem> preview)
+        {
+            var list = new List<string>();
+
+            foreach (PreviewItem item in preview)
+            {
+                list.Add("-- " + item.OldName);
+                list.Add("+ " + item.NewName);
+            }
+
+            return list;
+        }
+
+        private NameEditorOptions BuildOptions()
+        {
+            return new NameEditorOptions
+            {
+                FolderPath = FolderPath.Text,
+                CopyVideoNames = CopyCheckBox.IsChecked == true,
+                ExtendFileNames = ExtendCheckBox.IsChecked == true,
+                Extension = Extension.Text,
+            };
         }
     }
 }
