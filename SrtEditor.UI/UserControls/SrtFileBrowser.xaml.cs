@@ -18,8 +18,10 @@ namespace SrtEditor.UI.UserControls
                 Filter = "Subtitles (*.srt) | *.srt"
             };
 
-            bool? result = openFileDialog.ShowDialog();
-            FilePaths.Text = result == true ? openFileDialog.FileName : string.Empty;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                FilePaths.Text = openFileDialog.FileName;
+            }
         }
     }
 }

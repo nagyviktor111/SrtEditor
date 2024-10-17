@@ -11,7 +11,10 @@
             <Frame Source="Pages/TimeEditor.xaml" />
         </TabItem>
         <TabItem Header="Rename Files">
-            <Grid Margin="10">
+            <Grid Margin="10"
+                  AllowDrop="True"
+                  PreviewDragOver="RenamerPage_PreviewDragOver"
+                  Drop="RenamerPage_Drop">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -35,13 +38,14 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0"
-                                 x:Name="FilePaths"
+                                 x:Name="FolderPath"
                                  AllowDrop="True"
                                  HorizontalAlignment="Stretch"/>
                         <Button Grid.Column="1"
                                 HorizontalAlignment="Right"
                                 Padding="10, 2, 10, 2"
-                                Margin="5, 0, 0, 0">Browse</Button>
+                                Margin="5, 0, 0, 0"
+                                Click="BrowseButton_Click">Browse</Button>
                     </Grid>
                 </StackPanel>
                 <!--end folderbrowse-->
@@ -49,24 +53,31 @@
                 <!--region operations-->
                 <StackPanel Grid.Row="1"
                             Grid.Column="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                    <Label>Operations:</Label>
-                    <CheckBox Content="Copy video names"/>
-                    <CheckBox Content="Extend filename"/>
-                </StackPanel>
-                <!--end operations-->
-
-                <!--region operations2-->
-                <StackPanel Grid.Row="1"
-                            Grid.Column="1"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                    <Label>Extend with:</Label>
-                    <TextBox x:Name="Extension"
-                             Text=".hu"
-                             AllowDrop="True"
-                             HorizontalAlignment="Stretch"/>
+                            Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <Label>Operations:</Label>
+                            <StackPanel HorizontalAlignment="Center">
+                                <CheckBox Content="Copy video names"
+                                          IsChecked="True"/>
+                                <CheckBox Content="Extend filename"
+                                          x:Name="ExtendCheckBox"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1"
+                                    IsEnabled="{Binding ElementName=ExtendCheckBox, Path=IsChecked}">
+                            <Label>Extend with:</Label>
+                            <TextBox x:Name="Extension"
+                                     Text=".hu"
+                                     AllowDrop="True"
+                                     Width="100"
+                                     HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
                 <!--end operations2-->
 
@@ -76,7 +87,7 @@
                             Grid.ColumnSpan="2">
                     <Label>Preview</Label>
                     <ListBox Height="100"
-                             d:ItemsSource="{d:SampleData ItemCount=2}"/>
+                             x:Name="PreviewListBox"/>
                 </StackPanel>
                 <!--end Preview-->
 
@@ -91,7 +102,8 @@
             </Grid>
         </TabItem>
         <TabItem Header="Settings">
-            <Label>Coming soon</Label>
+            <Label HorizontalAlignment="Center"
+                   VerticalAlignment="Center">Coming soon</Label>
         </TabItem>
     </TabControl>
 </Window>
