@@ -2,7 +2,7 @@
 {
     public class NameEditorOptions
     {
-        public string? FolderPath { get; set; }
+        public required string FolderPath { get; set; }
 
         public bool CopyVideoNames { get; set; }
 

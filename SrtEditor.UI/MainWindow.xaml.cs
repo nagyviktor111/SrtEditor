@@ -61,12 +61,12 @@ namespace SrtEditor
                 var options = BuildOptions();
 
                 // test
-                var runner = new FileNameEditorRunner(options);
-                var preview = runner.UpdatePreview(options);
+                var runner = new FileNameEditorRunner();
+                var preview = runner.GetNewNames(options);
                 PreviewListBox.ItemsSource = BuildItemSource(preview);
                 // end test
 
-                MessageBox.Show("Done!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Done!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -78,11 +78,11 @@ namespace SrtEditor
             }
         }
 
-        private static List<string> BuildItemSource(IEnumerable<PreviewItem> preview)
+        private static List<string> BuildItemSource(IEnumerable<RenameItem> preview)
         {
             var list = new List<string>();
 
-            foreach (PreviewItem item in preview)
+            foreach (RenameItem item in preview)
             {
                 list.Add("-- " + item.OldName);
                 list.Add("+ " + item.NewName);
