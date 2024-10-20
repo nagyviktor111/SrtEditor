@@ -24,6 +24,7 @@
                           Unchecked="RenameOptions_Changed"/>
             </StackPanel>
         </StackPanel>
+        
         <StackPanel Grid.Column="1"
                     IsEnabled="{Binding ElementName=ExtendCheckBox, Path=IsChecked}">
             <Label>Extend with:</Label>
