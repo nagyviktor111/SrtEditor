@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using SrtEditor.Domain.NameEditor;
+﻿using SrtEditor.Domain.NameEditor;
 using SrtEditor.NameEditor;
 using System;
 using System.Collections.Generic;
@@ -13,16 +12,6 @@ namespace SrtEditor
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void FolderBrowseButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFolderDialog folderDialog = new();
-
-            if (folderDialog.ShowDialog() == true)
-            {
-                FolderPath.Text = folderDialog.FolderName;
-            }
         }
 
         private void NameEditorPage_PreviewDragOver(object sender, DragEventArgs e)
@@ -44,7 +33,7 @@ namespace SrtEditor
                 var droppedPaths = (string[])e.Data.GetData(DataFormats.FileDrop);
                 if (droppedPaths.Length == 1 && Directory.Exists(droppedPaths[0]))
                 {
-                    FolderPath.Text = droppedPaths[0];
+                    FolderBrowserInstance.FolderPath.Text = droppedPaths[0];
                 }
                 else
                 {
@@ -95,10 +84,10 @@ namespace SrtEditor
         {
             return new NameEditorOptions
             {
-                FolderPath = FolderPath.Text,
-                CopyVideoNames = CopyCheckBox.IsChecked == true,
-                ExtendFileNames = ExtendCheckBox.IsChecked == true,
-                Extension = Extension.Text,
+                FolderPath = FolderBrowserInstance.FolderPath.Text,
+                CopyVideoNames = RenameOptionsInstance.CopyCheckBox.IsChecked == true,
+                ExtendFileNames = RenameOptionsInstance.ExtendCheckBox.IsChecked == true,
+                Extension = RenameOptionsInstance.Extension.Text,
             };
         }
     }

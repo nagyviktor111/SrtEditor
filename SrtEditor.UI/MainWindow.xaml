@@ -27,64 +27,20 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <!--region folderbrowse-->
                 <StackPanel Grid.Row="0"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Margin="0 0 0 10">
-                    <Label>Open folder:</Label>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 x:Name="FolderPath"
-                                 AllowDrop="True"
-                                 HorizontalAlignment="Stretch"/>
-                        <Button Grid.Column="1"
-                                HorizontalAlignment="Right"
-                                Padding="10, 2, 10, 2"
-                                Margin="5, 0, 0, 0"
-                                Click="FolderBrowseButton_Click">Browse</Button>
-                    </Grid>
+                    <local:FolderBrowser x:Name="FolderBrowserInstance" />
                 </StackPanel>
-                <!--end folderbrowse-->
 
-                <!--region operations-->
                 <StackPanel Grid.Row="1"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Margin="0 0 0 10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
-                            <Label>Operations:</Label>
-                            <StackPanel HorizontalAlignment="Center">
-                                <CheckBox Content="Copy video names"
-                                          x:Name="CopyCheckBox"
-                                          IsChecked="True"/>
-                                <CheckBox Content="Extend filename"
-                                          x:Name="ExtendCheckBox"/>
-                            </StackPanel>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1"
-                                    IsEnabled="{Binding ElementName=ExtendCheckBox, Path=IsChecked}">
-                            <Label>Extend with:</Label>
-                            <TextBox x:Name="Extension"
-                                     Text=".hu"
-                                     AllowDrop="True"
-                                     Width="100"
-                                     HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Grid>
+                    <local:RenameOptions x:Name="RenameOptionsInstance" />
                 </StackPanel>
-                <!--end operations2-->
 
-                <!--region Preview-->
                 <Grid Grid.Row="2"
                       Grid.Column="0"
                       Grid.ColumnSpan="2">
@@ -96,14 +52,14 @@
                     <ListBox Grid.Row="1"
                              x:Name="PreviewListBox"/>
                 </Grid>
-                <!--end Preview-->
 
                 <StackPanel Grid.Row="3"
                             Grid.Column="1"
                             VerticalAlignment="Center">
                     <Button x:Name="RenameButton"
                             Margin="10"
-                            Padding="10" Click="RenameButton_Click">Rename files</Button>
+                            Padding="10"
+                            Click="RenameButton_Click">Rename files</Button>
                 </StackPanel>
 
             </Grid>
