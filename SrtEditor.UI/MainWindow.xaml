@@ -16,10 +16,10 @@
                   PreviewDragOver="NameEditorPage_PreviewDragOver"
                   Drop="NameEditorPage_Drop">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -30,7 +30,8 @@
                 <!--region folderbrowse-->
                 <StackPanel Grid.Row="0"
                             Grid.Column="0"
-                            Grid.ColumnSpan="2">
+                            Grid.ColumnSpan="2"
+                            Margin="0 0 0 10">
                     <Label>Open folder:</Label>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -53,7 +54,8 @@
                 <!--region operations-->
                 <StackPanel Grid.Row="1"
                             Grid.Column="0"
-                            Grid.ColumnSpan="2">
+                            Grid.ColumnSpan="2"
+                            Margin="0 0 0 10">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -83,13 +85,17 @@
                 <!--end operations2-->
 
                 <!--region Preview-->
-                <StackPanel Grid.Row="2"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="2">
-                    <Label>Preview</Label>
-                    <ListBox Height="100"
+                <Grid Grid.Row="2"
+                      Grid.Column="0"
+                      Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0">Preview</Label>
+                    <ListBox Grid.Row="1"
                              x:Name="PreviewListBox"/>
-                </StackPanel>
+                </Grid>
                 <!--end Preview-->
 
                 <StackPanel Grid.Row="3"
