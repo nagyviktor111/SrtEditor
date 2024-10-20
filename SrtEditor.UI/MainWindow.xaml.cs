@@ -9,9 +9,14 @@ namespace SrtEditor
 {
     public partial class MainWindow : Window
     {
+        private readonly FileNameEditorRunner _runner;
+
         public MainWindow()
         {
             InitializeComponent();
+            _runner = new FileNameEditorRunner();
+            FolderBrowserInstance.FolderPathChangedHandler += UpdatePreview!;
+            RenameOptionsInstance.OptionsChangedHandler += UpdatePreview!;
         }
 
         private void NameEditorPage_PreviewDragOver(object sender, DragEventArgs e)
@@ -34,6 +39,7 @@ namespace SrtEditor
                 if (droppedPaths.Length == 1 && Directory.Exists(droppedPaths[0]))
                 {
                     FolderBrowserInstance.FolderPath.Text = droppedPaths[0];
+                    UpdatePreview(sender, e);
                 }
                 else
                 {
@@ -48,14 +54,8 @@ namespace SrtEditor
             try
             {
                 var options = BuildOptions();
-
-                // test
-                var runner = new FileNameEditorRunner();
-                var preview = runner.GetNewNames(options);
-                PreviewListBox.ItemsSource = BuildItemSource(preview);
-                // end test
-
-                //MessageBox.Show("Done!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                _runner.Run(options);
+                MessageBox.Show("Done!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -67,6 +67,20 @@ namespace SrtEditor
             }
         }
 
+        private void UpdatePreview(object sender, EventArgs e)
+        {
+            try
+            {
+                var options = BuildOptions();
+                var preview = _runner.GetNewNames(options);
+                PreviewListBox.ItemsSource = BuildItemSource(preview);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().Name, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
         private static List<string> BuildItemSource(IEnumerable<RenameItem> preview)
         {
             var list = new List<string>();
@@ -75,6 +89,7 @@ namespace SrtEditor
             {
                 list.Add("-- " + item.OldName);
                 list.Add("+ " + item.NewName);
+                list.Add("*************************");
             }
 
             return list;
