@@ -15,9 +15,13 @@
             <StackPanel HorizontalAlignment="Center">
                 <CheckBox Content="Copy video names"
                           x:Name="CopyCheckBox"
-                          IsChecked="True"/>
+                          IsChecked="True"
+                          Checked="RenameOptions_Changed"
+                          Unchecked="RenameOptions_Changed"/>
                 <CheckBox Content="Extend filename"
-                          x:Name="ExtendCheckBox"/>
+                          x:Name="ExtendCheckBox"
+                          Checked="RenameOptions_Changed"
+                          Unchecked="RenameOptions_Changed"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="1"
@@ -27,7 +31,8 @@
                      Text=".hu"
                      AllowDrop="True"
                      Width="100"
-                     HorizontalAlignment="Center"/>
+                     HorizontalAlignment="Center"
+                     TextChanged="RenameOptions_Changed"/>
         </StackPanel>
     </Grid>
 </UserControl>
