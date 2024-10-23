@@ -1,4 +1,5 @@
-﻿using SrtEditor.Domain.NameEditor;
+﻿using SrtEditor.Domain.Exceptions;
+using SrtEditor.Domain.NameEditor;
 
 namespace SrtEditor.NameEditor
 {
@@ -6,19 +7,31 @@ namespace SrtEditor.NameEditor
     {
         public void Run(NameEditorOptions options)
         {
-            if (!options.CopyVideoNames && !options.ExtendFileNames)
+            IEnumerable<RenameItem> changes = GetNewNames(options);
+
+            if (!changes.Any())
             {
-                return;
+                throw new ValidationException("No changes!");
             }
 
-            foreach (var item in GetNewNames(options))
+            if (!options.CopyVideoNames && !options.ExtendFileNames)
             {
-                File.Move(item.OldName, item.NewName);
+                throw new ValidationException("You must select at least one operation!");
+            }
+
+            foreach (var item in changes)
+            {
+                File.Move(item.OldName, item.NewName, true);
             }
         }
 
         public IEnumerable<RenameItem> GetNewNames(NameEditorOptions options)
         {
+            if (!Directory.Exists(options.FolderPath))
+            {
+                return [];
+            }
+
             var list = Directory
                 .GetFiles(options.FolderPath, "*.srt", SearchOption.TopDirectoryOnly)
                 .Select(s => new RenameItem(s, s))

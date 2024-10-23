@@ -1,5 +1,5 @@
-﻿using SrtEditor.Domain.TimeEditor;
-using SrtEditor.TimeEditor.Exceptions;
+﻿using SrtEditor.Domain.Exceptions;
+using SrtEditor.Domain.TimeEditor;
 
 namespace SrtEditor.TimeEditor
 {

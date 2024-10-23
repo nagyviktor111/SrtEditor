@@ -1,4 +1,4 @@
-﻿namespace SrtEditor.TimeEditor.Exceptions
+﻿namespace SrtEditor.Domain.Exceptions
 {
     public class NegativeTimeException : Exception
     {
