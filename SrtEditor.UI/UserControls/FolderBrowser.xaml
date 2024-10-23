@@ -16,7 +16,8 @@
             <TextBox Grid.Column="0"
                      x:Name="FolderPath"
                      AllowDrop="True"
-                     HorizontalAlignment="Stretch"/>
+                     HorizontalAlignment="Stretch"
+                     LostFocus="FolderBrowserLostFocus"/>
             <Button Grid.Column="1"
                     HorizontalAlignment="Right"
                     Padding="10, 2, 10, 2"

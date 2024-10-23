@@ -24,5 +24,10 @@ namespace SrtEditor.UI.UserControls
                 FolderPathChangedHandler?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        private void FolderBrowserLostFocus(object sender, RoutedEventArgs e)
+        {
+            FolderPathChangedHandler?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
