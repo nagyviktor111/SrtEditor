@@ -59,7 +59,7 @@ namespace SrtEditor.NameEditor
 
             if (videos.Count < list.Count)
             {
-                return list;
+                throw new ValidationException("There are fewer video files than subtitles!");
             }
 
             for (var i = 0; i < list.Count; i++)

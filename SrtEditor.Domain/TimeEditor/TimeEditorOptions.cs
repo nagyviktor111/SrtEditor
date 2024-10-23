@@ -2,7 +2,7 @@
 {
     public class TimeEditorOptions
     {
-        public string FilePaths { get; set; } = string.Empty;
+        public string FilePath { get; set; } = string.Empty;
 
         public double Delay { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace SrtEditor.UI.UserControls
@@ -13,7 +14,7 @@ namespace SrtEditor.UI.UserControls
             InitializeComponent();
         }
 
-        private void RenameOptions_Changed(object sender, System.Windows.RoutedEventArgs e)
+        private void RenameOptions_Changed(object sender, RoutedEventArgs e)
         {
             OptionsChangedHandler?.Invoke(this, EventArgs.Empty);
         }

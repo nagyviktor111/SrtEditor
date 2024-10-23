@@ -80,7 +80,7 @@ namespace SrtEditor.UI.Pages
                     Subtitle2 = TimeSpan.Parse(TimeScaleEditorInstance.Subtitle2.Text)
                 },
                 Delay = double.Parse(DelayInputInstance.Delay.Text),
-                FilePaths = SrtFileBrowserInstance.FilePaths.Text
+                FilePath = SrtFileBrowserInstance.FilePaths.Text
             };
         }
     }

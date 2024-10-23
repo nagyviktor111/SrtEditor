@@ -3,7 +3,7 @@ using SrtEditor.Domain.TimeEditor;
 
 namespace SrtEditor.TimeEditor
 {
-    public class TimeSpanCalculator(TimeEditorOptions options)
+    internal class TimeSpanCalculator(TimeEditorOptions options)
     {
         private readonly TimeEditorOptions _options = options;
 

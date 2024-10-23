@@ -9,9 +9,10 @@
     <StackPanel>
         <Label>Location of the created file:</Label>
         <StackPanel Orientation="Vertical"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-            <RadioButton x:Name="SameFolderDifferentName" IsChecked="True">Same folder, different name</RadioButton>
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <RadioButton x:Name="SameFolderDifferentName"
+                         IsChecked="True">Same folder, different name</RadioButton>
             <RadioButton x:Name="OverwriteOriginal" >Overwrite original file</RadioButton>
         </StackPanel>
     </StackPanel>

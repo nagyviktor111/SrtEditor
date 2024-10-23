@@ -23,14 +23,14 @@ namespace SrtEditor.TimeEditor
         public void Run()
         {
             _validator.Validate();
-            var lines = ReadLines();
-            lines = SelectCalculation(lines);
-            WriteLines(lines);
+            var lines = Read();
+            lines = Update(lines);
+            Write(lines);
         }
 
-        private IEnumerable<string> ReadLines()
+        private IEnumerable<string> Read()
         {
-            using StreamReader reader = new(_options.FilePaths, _encoding, true);
+            using StreamReader reader = new(_options.FilePath, _encoding, true);
             string? line;
             while ((line = reader.ReadLine()) != null)
             {
@@ -38,22 +38,22 @@ namespace SrtEditor.TimeEditor
             }
         }
 
-        private IEnumerable<string> SelectCalculation(IEnumerable<string> lines)
+        private IEnumerable<string> Update(IEnumerable<string> lines)
         {
             if (TimeEditorOptionsValidator.HasDeley(_options.Delay))
             {
-                lines = UpdateLines(lines, _calculator.CalculateDelay);
+                lines = Calculate(lines, _calculator.CalculateDelay);
             }
 
             if (TimeEditorOptionsValidator.HasTimeScaleDiff(_options.TimeScaleDifference))
             {
-                lines = UpdateLines(lines, _calculator.CalculateScale);
+                lines = Calculate(lines, _calculator.CalculateScale);
             }
 
             return lines;
         }
 
-        private static List<string> UpdateLines(IEnumerable<string> lines, Func<string, string> calculationFunc)
+        private static List<string> Calculate(IEnumerable<string> lines, Func<string, string> calculationFunc)
         {
             var newLines = new List<string>();
 
@@ -66,11 +66,11 @@ namespace SrtEditor.TimeEditor
             return newLines;
         }
 
-        private void WriteLines(IEnumerable<string> lines)
+        private void Write(IEnumerable<string> lines)
         {
             var newPath = _options.CreatedFileLocation == CreatedFileLocation.OverwriteOriginal
-                ? _options.FilePaths
-                : _options.FilePaths.Replace(".srt", "-modified.srt");
+                ? _options.FilePath
+                : _options.FilePath.Replace(".srt", "-modified.srt");
             using StreamWriter writer = new(newPath, false, _encoding);
             foreach (var line in lines)
             {

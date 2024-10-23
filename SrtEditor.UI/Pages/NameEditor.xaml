@@ -56,7 +56,7 @@
             <Button x:Name="RenameButton"
                     Margin="10"
                     Padding="10"
-                    Click="RenameButton_Click">Rename files</Button>
+                    Click="RenameButton_Click">Rename all</Button>
         </StackPanel>
     </Grid>
 

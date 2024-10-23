@@ -9,7 +9,7 @@
     <StackPanel>
         <Label>Time scale difference:</Label>
         <Grid VerticalAlignment="Center"
-                  HorizontalAlignment="Center">
+              HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

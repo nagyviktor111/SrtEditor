@@ -3,13 +3,13 @@ using SrtEditor.Domain.TimeEditor;
 
 namespace SrtEditor.TimeEditor
 {
-    public class TimeEditorOptionsValidator(TimeEditorOptions options)
+    internal class TimeEditorOptionsValidator(TimeEditorOptions options)
     {
         private readonly TimeEditorOptions _options = options;
 
         public void Validate()
         {
-            bool isValid = ProperFileExists(_options.FilePaths)
+            bool isValid = ProperFileExists(_options.FilePath)
                 && (HasDeley(_options.Delay) || HasTimeScaleDiff(_options.TimeScaleDifference));
 
             if (!isValid)

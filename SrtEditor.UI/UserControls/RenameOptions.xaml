@@ -29,7 +29,7 @@
                     IsEnabled="{Binding ElementName=ExtendCheckBox, Path=IsChecked}">
             <Label>Extend with:</Label>
             <TextBox x:Name="Extension"
-                     Text=".hu"
+                     Text=".en"
                      AllowDrop="True"
                      Width="100"
                      HorizontalAlignment="Center"
