@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+	<PublishSingleFile>true</PublishSingleFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="subtitle_15356348.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SrtEditor.Domain\SrtEditor.Domain.csproj" />
+    <ProjectReference Include="..\SrtEditor.NameEditor\SrtEditor.NameEditor.csproj" />
+    <ProjectReference Include="..\SrtEditor.TimeEditor\SrtEditor.TimeEditor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="subtitle_15356348.png" />
+  </ItemGroup>
+
+</Project>
