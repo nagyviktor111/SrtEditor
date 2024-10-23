@@ -11,62 +11,11 @@
             <Frame Source="Pages/TimeEditor.xaml" />
         </TabItem>
         <TabItem Header="Name Editor">
-            <Grid Margin="10"
-                  AllowDrop="True"
-                  PreviewDragOver="NameEditorPage_PreviewDragOver"
-                  Drop="NameEditorPage_Drop">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Row="0"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="2"
-                            Margin="0 0 0 10">
-                    <local:FolderBrowser x:Name="FolderBrowserInstance" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="1"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="2"
-                            Margin="0 0 0 10">
-                    <local:RenameOptions x:Name="RenameOptionsInstance" />
-                </StackPanel>
-
-                <Grid Grid.Row="2"
-                      Grid.Column="0"
-                      Grid.ColumnSpan="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0">Preview</Label>
-                    <ListBox Grid.Row="1"
-                             x:Name="PreviewListBox"/>
-                </Grid>
-
-                <StackPanel Grid.Row="3"
-                            Grid.Column="1"
-                            VerticalAlignment="Center">
-                    <Button x:Name="RenameButton"
-                            Margin="10"
-                            Padding="10"
-                            Click="RenameButton_Click">Rename files</Button>
-                </StackPanel>
-
-            </Grid>
+            <Frame Source="Pages/NameEditor.xaml" />
         </TabItem>
-        <TabItem Header="Settings">
+        <!--<TabItem Header="Settings">
             <Label HorizontalAlignment="Center"
                    VerticalAlignment="Center">Coming soon</Label>
-        </TabItem>
+        </TabItem>-->
     </TabControl>
 </Window>
